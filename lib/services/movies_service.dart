@@ -45,4 +45,28 @@ class MovieService {
             querySnapshot.docs.map((e) => Movie.fromJson(e.data())).toList());
     return movies;
   }
+
+  /// Delete a movie from Firestore
+  Future<void> deleteFirestoreMovie(String movieId) async {
+    return _db.collection('movies').doc(movieId).delete();
+  }
+
+  /// Update in Firestore the movie's title
+  Future<void> updateMovieTitle(String movieId, String movieTitle) async {
+    return await _db
+        .collection('movies')
+        .doc(movieId)
+        .update({'title': movieTitle});
+  }
+
+  /// Add a movie from the movieIdsToAdd array to Firestore
+  Future<void> addMovie() async {
+    if (Constant.movieIdsToAdd.length > 0) {
+      final movie = await fetchRestMovie(Constant.movieIdsToAdd[0]);
+      await addFirestoreMovie(movie);
+      Constant.movieIdsToAdd.removeAt(0);
+    } else {
+      print('There are no movies to add');
+    }
+  }
 }

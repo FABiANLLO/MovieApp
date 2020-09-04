@@ -29,6 +29,21 @@ class Constant {
     '421658',
     '593680'
   ];
+  static final movieIdsToAdd = [
+    '13807',
+    '17692',
+    '485774',
+    '11667',
+    '9320',
+    '792'
+  ];
+  static const noMoviesMsg = 'No hay';
+  static const moviesListTitle = 'Movies List';
+  static const imagePrefix = 'https://image.tmdb.org/t/p';
+  static const posterImagePrefix = '$imagePrefix/w92';
+  static const editmovieTitle = 'Edit Movie Title';
+  static const backdropImagePrefix = '$imagePrefix/w780';
+  static const loadingImage = 'assets/no_image.png';
 
   static final allDataTypes = DataType(
       boolField: false,

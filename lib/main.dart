@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:movieapp/screens/home_screen.dart';
+import 'package:movieapp/screens/movie_detail.dart';
 import 'package:movieapp/services/movies_service.dart';
 import 'package:provider/provider.dart';
 import 'Models/constant.dart';
@@ -19,6 +20,16 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  TextStyle _buildTextStyle() {
+    return TextStyle(color: Colors.white, shadows: <Shadow>[
+      Shadow(
+        offset: Offset(1.0, 1.0),
+        blurRadius: 3.0,
+        color: Colors.black,
+      )
+    ]);
+  }
+
   @override
   Widget build(BuildContext context) {
     final _movisService = MovieService();
@@ -29,8 +40,14 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: Constant.appName,
-          theme: ThemeData(primarySwatch: Colors.brown),
+          theme: ThemeData(
+              primarySwatch: Colors.amber,
+              scaffoldBackgroundColor: Colors.black87,
+              textTheme: TextTheme(headline6: _buildTextStyle())),
           home: HomeScreen(),
+          routes: {
+            MovieDetail.routeName: (_) => MovieDetail(),
+          },
         ));
   }
 }
