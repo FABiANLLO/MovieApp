@@ -5,6 +5,31 @@ class Constant {
   static const appName = 'Movie App';
   static const movieUrl =
       'https://api.themoviedb.org/3/movie/{movieId}?api_key=d737f530cd143811196aef1db387936e';
+  static const movieIds = [
+    '19404',
+    '278',
+    '238',
+    '424',
+    '240',
+    '372058',
+    '496243',
+    '129',
+    '497',
+    '680',
+    '637',
+    '13',
+    '311',
+    '122',
+    '155',
+    '769',
+    '346',
+    '389',
+    '11216',
+    '429',
+    '421658',
+    '593680'
+  ];
+
   static final allDataTypes = DataType(
       boolField: false,
       doubleField: 5.6,

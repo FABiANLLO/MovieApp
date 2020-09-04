@@ -1,7 +1,8 @@
 import 'dart:convert';
-import 'package:movieapp/Models/genre.dart';
-import 'package:movieapp/Models/movie_collection.dart';
-import 'package:movieapp/Models/production_country.dart';
+
+import 'genre.dart';
+import 'movie_collection.dart';
+import 'production_country.dart';
 
 Movie movieFromJson(String str) => Movie.fromJson(json.decode(str));
 
@@ -59,12 +60,13 @@ class Movie {
         "title": title,
         "overview": overview,
         "adult": adult,
-        "movie_collection": movieCollection.toJson(),
-        "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
+        "belongs_to_collection":
+            movieCollection == null ? null : movieCollection.toJson(),
+        "genres": List<dynamic>.from(genres.map((genre) => genre.toJson())),
         "release_date":
             "${releaseDate.year.toString().padLeft(4, '0')}-${releaseDate.month.toString().padLeft(2, '0')}-${releaseDate.day.toString().padLeft(2, '0')}",
-        "production_countries":
-            List<dynamic>.from(productionCountries.map((x) => x.toJson())),
+        "production_countries": List<dynamic>.from(
+            productionCountries.map((country) => country.toJson())),
         "poster_path": posterPath,
         "backdrop_path": backdropPath,
       };

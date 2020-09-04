@@ -16,7 +16,7 @@ class BasicCrud {
   // Usando Set
   Future<void> addDocument() async {
     await _collectionReference
-        .doc('set_data')
+        .doc('set_data2')
         .set(Constant.allDataTypes.toMap());
   }
 
