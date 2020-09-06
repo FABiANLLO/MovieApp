@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'genre.dart';
 import 'movie_collection.dart';
 import 'production_country.dart';
@@ -9,6 +11,19 @@ Movie movieFromJson(String str) => Movie.fromJson(json.decode(str));
 String movieToJson(Movie data) => json.encode(data.toJson());
 
 class Movie {
+  int id;
+  double voteAverage;
+  String title;
+  String overview;
+  bool adult;
+  MovieCollection movieCollection;
+  List<Genre> genres;
+  DateTime releaseDate;
+  List<ProductionCountry> productionCountries;
+  String posterPath;
+  String backdropPath;
+  GeoPoint latLng;
+
   Movie({
     this.id,
     this.voteAverage,
@@ -21,19 +36,8 @@ class Movie {
     this.productionCountries,
     this.posterPath,
     this.backdropPath,
+    this.latLng,
   });
-
-  int id;
-  double voteAverage;
-  String title;
-  String overview;
-  bool adult;
-  MovieCollection movieCollection;
-  List<Genre> genres;
-  DateTime releaseDate;
-  List<ProductionCountry> productionCountries;
-  String posterPath;
-  String backdropPath;
 
   factory Movie.fromJson(Map<String, dynamic> json) => Movie(
         id: json["id"],
@@ -52,6 +56,7 @@ class Movie {
                 .map((country) => ProductionCountry.fromJson(country))),
         posterPath: json["poster_path"],
         backdropPath: json["backdrop_path"],
+        latLng: json["lat_lng"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -69,5 +74,6 @@ class Movie {
             productionCountries.map((country) => country.toJson())),
         "poster_path": posterPath,
         "backdrop_path": backdropPath,
+        "lat_lng": latLng,
       };
 }

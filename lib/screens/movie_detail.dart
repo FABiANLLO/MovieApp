@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movieapp/Models/constant.dart';
 import 'package:movieapp/Models/movie.dart';
+import 'package:movieapp/widgets/country_map.dart';
 import 'package:movieapp/widgets/vote_average.dart';
 
 class MovieDetail extends StatelessWidget {
@@ -69,6 +70,14 @@ class MovieDetail extends StatelessWidget {
                   ))
                 ],
               ),
+            ),
+            SizedBox(
+              width: double.infinity,
+              height: 300.0,
+              child: CountryMap(
+                  latitude: movie.latLng.latitude,
+                  longitude: movie.latLng.longitude,
+                  countryName: movie.productionCountries.first.name),
             )
           ],
         ),

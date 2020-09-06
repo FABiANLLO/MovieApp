@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _movisService = MovieService();
+    // _movisService.addAllMovies();
     return MultiProvider(
         providers: [
           StreamProvider(create: (_) => _movisService.fetchAllMovies())

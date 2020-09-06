@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:http/http.dart' as http;
 import 'package:movieapp/Models/constant.dart';
 import 'package:movieapp/Models/movie.dart';
+import 'dart:convert';
 
 class MovieService {
   final _db = FirebaseFirestore.instance;
@@ -28,6 +29,8 @@ class MovieService {
     final movies = List<Movie>();
     for (String movieId in Constant.movieIds) {
       final movie = await fetchRestMovie(movieId);
+      movie.latLng =
+          await fetchLatLng(movie.productionCountries.first.iso31661);
       movies.add(movie);
       await addFirestoreMovie(movie);
     }
@@ -63,10 +66,25 @@ class MovieService {
   Future<void> addMovie() async {
     if (Constant.movieIdsToAdd.length > 0) {
       final movie = await fetchRestMovie(Constant.movieIdsToAdd[0]);
+      movie.latLng =
+          await fetchLatLng(movie.productionCountries.first.iso31661);
       await addFirestoreMovie(movie);
       Constant.movieIdsToAdd.removeAt(0);
     } else {
       print('There are no movies to add');
     }
+  }
+
+  Future<GeoPoint> fetchLatLng(String countryCode) async {
+    GeoPoint geoPoint;
+    await http
+        .get(Constant.countryCodeUrl.replaceFirst('{code}', countryCode))
+        .then((response) {
+      final latLng = json.decode(response.body)['latlng'];
+      double latitude = latLng[0];
+      double longitude = latLng[1];
+      geoPoint = GeoPoint(latitude, longitude);
+    });
+    return geoPoint;
   }
 }

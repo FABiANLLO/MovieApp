@@ -44,7 +44,8 @@ class Constant {
   static const editmovieTitle = 'Edit Movie Title';
   static const backdropImagePrefix = '$imagePrefix/w780';
   static const loadingImage = 'assets/no_image.png';
-
+  static const String countryCodeUrl =
+      'https://restcountries.eu/rest/v2/alpha/{code}';
   static final allDataTypes = DataType(
       boolField: false,
       doubleField: 5.6,
@@ -60,4 +61,6 @@ class Constant {
       stringField: 'Anything',
       timestampField:
           Timestamp.fromDate(DateTime.parse('2020-05-08 19:52:23')));
+
+  static const mapStyle = [];
 }
